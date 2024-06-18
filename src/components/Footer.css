@@ -1,0 +1,15 @@
+
+
+/* src/components/Footer.css */
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    background-color: #282c34;
+    color: white;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+  }
+  

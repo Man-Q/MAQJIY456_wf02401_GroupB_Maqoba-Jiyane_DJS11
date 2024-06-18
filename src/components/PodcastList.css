@@ -1,0 +1,22 @@
+
+
+/* src/components/PodcastList.css */
+.podcast-list {
+  padding: 20px;
+}
+
+.sort-options {
+  margin-bottom: 20px;
+}
+
+.sort-options button {
+  margin-right: 10px;
+  padding: 5px 10px;
+}
+
+.podcast-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  justify-content: center;
+}
