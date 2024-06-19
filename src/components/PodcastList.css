@@ -20,3 +20,13 @@
   gap: 20px;
   justify-content: center;
 }
+
+.loading,
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  font-size: 20px;
+  text-align: center;
+}

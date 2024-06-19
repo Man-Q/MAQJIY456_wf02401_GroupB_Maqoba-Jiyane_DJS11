@@ -6,12 +6,21 @@ import './PodcastList.css';
 const PodcastList = () => {
   const [podcasts, setPodcasts] = useState([]);
   const [sortField, setSortField] = useState('name');
+  const [isLoading, setIsLoading] = useState(true); // Add loading state
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetch('https://podcast-api.netlify.app')
       .then(response => response.json())
-      .then(data => setPodcasts(data))
-      .catch(error => console.error('Error fetching podcasts:', error));
+      .then(data => {
+        setPodcasts(data);
+        setIsLoading(false); // Data fetched, set loading to false
+      })
+      .catch(error => {
+        console.error('Error fetching podcasts:', error);
+        setError('Error fetching podcasts');
+        setIsLoading(false); // Error occurred, set loading to false
+      });
   }, []);
 
   const sortPodcasts = (field) => {
@@ -26,6 +35,14 @@ const PodcastList = () => {
     });
     setPodcasts(sortedPodcasts);
     setSortField(field);
+  };
+
+  if (isLoading) {
+    return <div className="loading">Loading...</div>; // Loading state
+  }
+
+  if (error) {
+    return <div>{error}</div>; // Error state
   }
 
   return (

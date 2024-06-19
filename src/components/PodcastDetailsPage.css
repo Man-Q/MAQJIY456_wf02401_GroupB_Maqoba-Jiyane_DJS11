@@ -1,47 +1,44 @@
-
-
 /* PodcastDetailsPage.css */
 .podcast-details {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .podcast-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .podcast-description {
-    font-size: 16px;
-    line-height: 1.5;
-    margin-bottom: 20px;
-  }
-  
-  .seasons-container {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding: 10px 0;
-  }
-  
-  .season-card {
-    flex: 0 0 auto;
-    width: 150px;
-    margin-right: 10px;
-    scroll-snap-align: start;
-  }
-  
-  .season-card img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-  }
-  
-  .season-number {
-    font-size: 14px;
-    text-align: center;
-    margin-top: 5px;
-  }
-  
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.podcast-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.podcast-description {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.seasons-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 10px 0;
+}
+
+.season-card {
+  flex: 0 0 auto;
+  width: 150px;
+  margin-right: 10px;
+  scroll-snap-align: start;
+}
+
+.season-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.season-number {
+  font-size: 14px;
+  text-align: center;
+  margin-top: 5px;
+}
