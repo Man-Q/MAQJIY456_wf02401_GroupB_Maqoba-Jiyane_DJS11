@@ -1,20 +1,47 @@
-// src/App.js
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import PodcastList from './components/PodcastList';
-import PodcastDetailsPage from './components/PodcastDetailsPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import PodcastList from './components/PodcastList';
+import PodcastDetailsPage from './components/PodcastDetailsPage';
+import FavoritesModal from './components/FavoritesModal';
+import './App.css';
 
 const App = () => {
+  const [favorites, setFavorites] = useState([]);
+  const [isFavoritesModalOpen, setIsFavoritesModalOpen] = useState(false);
+
+  const addToFavorites = (episode, showTitle, seasonNumber) => {
+    setFavorites([...favorites, { ...episode, showTitle, seasonNumber }]);
+  };
+
+  const removeFavorite = (episodeId) => {
+    setFavorites(favorites.filter(episode => episode.id !== episodeId));
+  };
+
+  const clearFavorites = () => {
+    setFavorites([]);
+  };
+
+  const toggleFavoritesModal = () => {
+    setIsFavoritesModalOpen(!isFavoritesModalOpen);
+  };
+
   return (
     <Router>
-      <Header/>
+      <Header onFavoritesClick={toggleFavoritesModal} />
       <Routes>
-        <Route path="/" element={<PodcastList />} />
-        <Route path="/id/:id" element={<PodcastDetailsPage />} />
+        <Route path="/" element={<PodcastList addToFavorites={addToFavorites} />} />
+        <Route path="/id/:id" element={<PodcastDetailsPage addToFavorites={addToFavorites} />} />
       </Routes>
-      <Footer/>
+      <Footer />
+      <FavoritesModal 
+        isOpen={isFavoritesModalOpen} 
+        onClose={toggleFavoritesModal} 
+        favorites={favorites}
+        removeFavorite={removeFavorite}
+        clearFavorites={clearFavorites} 
+      />
     </Router>
   );
 };

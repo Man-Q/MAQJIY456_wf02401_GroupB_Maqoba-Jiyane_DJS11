@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import './PodcastDetailsPage.css';
 
-const PodcastDetailsPage = () => {
+const PodcastDetailsPage = ({ addToFavorites }) => {
   const { id } = useParams();
   const [podcastDetails, setPodcastDetails] = useState(null);
   const [error, setError] = useState(null);
@@ -68,14 +68,13 @@ const PodcastDetailsPage = () => {
 
   return (
     <div className="podcast-details">
-      <h2 className="">{podcastDetails.title}</h2>
+      <h2 className="podcast-title">{podcastDetails.title}</h2>
       <p className="podcast-description">{podcastDetails.description}</p>
       <div className="seasons-container">
         {podcastDetails.seasons.map(season => (
           <div key={season.id} className="season-card" onClick={() => handleSeasonClick(season)}>
             <img src={season.image} alt={`Season ${season.season}`} />
             <p className="season-number">Season {season.season}</p>
-            <p className="season-number">Episodes {season.episodes.length}</p>
           </div>
         ))}
       </div>
@@ -83,8 +82,9 @@ const PodcastDetailsPage = () => {
         <div className="episodes-container">
           <h3>Episodes of Season {selectedSeason.season}</h3>
           {selectedSeason.episodes.map(episode => (
-            <div key={episode.id} className="episode-card" onClick={() => handleEpisodeClick(episode)}>
-              <p>{episode.title}</p>
+            <div key={episode.id} className="episode-card">
+              <p onClick={() => handleEpisodeClick(episode)}>{episode.title}</p>
+              <button onClick={() => addToFavorites(episode, podcastDetails.title, selectedSeason.season)}>Add to Favorites</button>
             </div>
           ))}
         </div>
