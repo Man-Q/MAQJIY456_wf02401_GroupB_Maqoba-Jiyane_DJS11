@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import EpisodeCard from './EpisodeCard'; // Assuming you have an EpisodeCard component
-import './PodcastDetailsPage.css'; // Import your CSS file
+import './PodcastDetailsPage.css';
 
 const PodcastDetailsPage = () => {
   const { id } = useParams();
@@ -9,6 +8,9 @@ const PodcastDetailsPage = () => {
   const [error, setError] = useState(null);
   const [selectedSeason, setSelectedSeason] = useState(null);
   const [selectedEpisode, setSelectedEpisode] = useState(null);
+  const [audioSrc, setAudioSrc] = useState('');
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef(null); // Ref for the audio element
 
   useEffect(() => {
     const fetchPodcastDetails = async () => {
@@ -36,6 +38,20 @@ const PodcastDetailsPage = () => {
 
   const handleEpisodeClick = (episode) => {
     setSelectedEpisode(episode);
+    setAudioSrc('https://podcast-api.netlify.app/placeholder-audio.mp3');
+    setIsPlaying(true);
+  };
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.load();
+      audioRef.current.play();
+    }
+  }, [audioSrc]);
+
+  const handleAudioEnd = () => {
+    setIsPlaying(false);
   };
 
   if (!id) {
@@ -52,13 +68,14 @@ const PodcastDetailsPage = () => {
 
   return (
     <div className="podcast-details">
-      <h2 className="podcast-title">{podcastDetails.title}</h2>
+      <h2 className="">{podcastDetails.title}</h2>
       <p className="podcast-description">{podcastDetails.description}</p>
       <div className="seasons-container">
         {podcastDetails.seasons.map(season => (
           <div key={season.id} className="season-card" onClick={() => handleSeasonClick(season)}>
             <img src={season.image} alt={`Season ${season.season}`} />
             <p className="season-number">Season {season.season}</p>
+            <p className="season-number">Episodes {season.episodes.length}</p>
           </div>
         ))}
       </div>
@@ -66,15 +83,17 @@ const PodcastDetailsPage = () => {
         <div className="episodes-container">
           <h3>Episodes of Season {selectedSeason.season}</h3>
           {selectedSeason.episodes.map(episode => (
-            <EpisodeCard key={episode.id} episode={episode} onClick={() => handleEpisodeClick(episode)} />
+            <div key={episode.id} className="episode-card" onClick={() => handleEpisodeClick(episode)}>
+              <p>{episode.title}</p>
+            </div>
           ))}
         </div>
       )}
-      {selectedEpisode && (
+      {isPlaying && (
         <div className="player-container">
-          <h3>Now Playing: {selectedEpisode.title}</h3>
-          <audio controls>
-            <source src="https://podcast-api.netlify.app/placeholder-audio.mp3" type="audio/mpeg" />
+          <h3>Now Playing: {selectedEpisode?.title}</h3>
+          <audio controls ref={audioRef} onEnded={handleAudioEnd}>
+            <source src={audioSrc} type="audio/mpeg" />
             Your browser does not support the audio element.
           </audio>
         </div>

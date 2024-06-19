@@ -42,3 +42,23 @@
   text-align: center;
   margin-top: 5px;
 }
+
+.season-card {
+  cursor: pointer;
+  text-align: center;
+}
+
+.episodes-container {
+  margin-top: 20px;
+}
+
+.episode-card {
+  cursor: pointer;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.player-container {
+  margin-top: 20px;
+}
