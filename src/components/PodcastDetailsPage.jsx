@@ -68,7 +68,7 @@ const PodcastDetailsPage = ({ addToFavorites }) => {
 
   return (
     <div className="podcast-details">
-      <h2 className="podcast-title">{podcastDetails.title}</h2>
+      <h2 className="">{podcastDetails.title}</h2>
       <p className="podcast-description">{podcastDetails.description}</p>
       <div className="seasons-container">
         {podcastDetails.seasons.map(season => (

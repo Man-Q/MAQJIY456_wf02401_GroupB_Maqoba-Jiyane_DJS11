@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import PodcastList from './components/PodcastList';
-import PodcastDetailsPage from './components/PodcastDetailsPage';
-import FavoritesModal from './components/FavoritesModal';
-import './App.css';
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import PodcastList from "./components/PodcastList";
+import PodcastDetailsPage from "./components/PodcastDetailsPage";
+import FavoritesModal from "./components/FavoritesModal";
+import "./App.css";
 
 const App = () => {
   const [favorites, setFavorites] = useState([]);
@@ -16,7 +16,9 @@ const App = () => {
   };
 
   const removeFavorite = (episodeId) => {
-    setFavorites(favorites.filter(episode => episode.id !== episodeId));
+    setFavorites((prevFavorites) =>
+      prevFavorites.filter((episode) => episode.id !== episodeId)
+    );
   };
 
   const clearFavorites = () => {
@@ -31,16 +33,22 @@ const App = () => {
     <Router>
       <Header onFavoritesClick={toggleFavoritesModal} />
       <Routes>
-        <Route path="/" element={<PodcastList addToFavorites={addToFavorites} />} />
-        <Route path="/id/:id" element={<PodcastDetailsPage addToFavorites={addToFavorites} />} />
+        <Route
+          path="/"
+          element={<PodcastList addToFavorites={addToFavorites} />}
+        />
+        <Route
+          path="/id/:id"
+          element={<PodcastDetailsPage addToFavorites={addToFavorites} />}
+        />
       </Routes>
       <Footer />
-      <FavoritesModal 
-        isOpen={isFavoritesModalOpen} 
-        onClose={toggleFavoritesModal} 
+      <FavoritesModal
+        isOpen={isFavoritesModalOpen}
+        onClose={toggleFavoritesModal}
         favorites={favorites}
-        removeFavorite={removeFavorite}
-        clearFavorites={clearFavorites} 
+        removeFavorite={removeFavorite} // Pass removeFavorite function here
+        clearFavorites={clearFavorites}
       />
     </Router>
   );
