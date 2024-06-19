@@ -37,6 +37,8 @@ const FavoritesModal = ({ isOpen, onClose, favorites, removeFavorite, clearFavor
   // Get sorted favorites based on current sort type
   const sortedFavorites = sortFavorites(sortType);
 
+  const currentDateTime = new Date();  // Format the date and time
+  const formattedDateTime = `${currentDateTime.toLocaleDateString()} ${currentDateTime.toLocaleTimeString()}`;
   return (
     <div className="modal-overlay">
       <div className="modal-content">
@@ -56,7 +58,7 @@ const FavoritesModal = ({ isOpen, onClose, favorites, removeFavorite, clearFavor
             <li key={episode.id} className="favorite-item">
               <div>
                 <h3>{episode.title}</h3>
-                <p>{episode.description}</p>
+                <p>{formattedDateTime}</p>
               </div>
               <button onClick={() => removeFavorite(episode.id)}>Remove</button>
             </li>
