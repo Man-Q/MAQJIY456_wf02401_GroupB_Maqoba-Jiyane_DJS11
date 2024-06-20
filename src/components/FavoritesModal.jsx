@@ -1,31 +1,33 @@
-import React, { useState } from 'react';
-import './FavoritesModal.css'; // Import your modal CSS here
+import React, { useState, useEffect } from 'react';
+import './FavoritesModal.css';
 
 const FavoritesModal = ({ isOpen, onClose, favorites, removeFavorite, clearFavorites }) => {
-  const [sortType, setSortType] = useState('titleAtoZ'); // Default sort type
+  const [sortType, setSortType] = useState('titleAtoZ');
+
   if (!isOpen) return null;
 
+  // Group episodes by show and season
   const groupedFavorites = favorites.reduce((acc, episode) => {
-    const { showTitle, seasonNumber } = episode;
-    if (!acc[showTitle]) acc[showTitle] = {};
-    if (!acc[showTitle][seasonNumber]) acc[showTitle][seasonNumber] = [];
-    acc[showTitle][seasonNumber].push(episode);
+    const { title, seasonNumber } = episode;
+    if (!acc[title]) acc[title] = {};
+    if (!acc[title][seasonNumber]) acc[title][seasonNumber] = [];
+    acc[title][seasonNumber].push(episode);
     return acc;
   }, {});
 
   // Sorting functions
-  const sortFavorites = (type) => {
+  const sortEpisodes = (episodes, type) => {
     switch (type) {
       case 'titleAtoZ':
-        return favorites.slice().sort((a, b) => a.title.localeCompare(b.title));
+        return episodes.sort((a, b) => a.title.localeCompare(b.title));
       case 'titleZtoA':
-        return favorites.slice().sort((a, b) => b.title.localeCompare(a.title));
+        return episodes.sort((a, b) => b.title.localeCompare(a.title));
       case 'recentFirst':
-        return favorites.slice().sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+        return episodes.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
       case 'oldestFirst':
-        return favorites.slice().sort((a, b) => new Date(a.updatedAt) - new Date(b.updatedAt));
+        return episodes.sort((a, b) => new Date(a.updatedAt) - new Date(b.updatedAt));
       default:
-        return favorites;
+        return episodes;
     }
   };
 
@@ -34,11 +36,11 @@ const FavoritesModal = ({ isOpen, onClose, favorites, removeFavorite, clearFavor
     setSortType(e.target.value);
   };
 
-  // Get sorted favorites based on current sort type
-  const sortedFavorites = sortFavorites(sortType);
-
-  const currentDateTime = new Date();  // Format the date and time
+  // Get current date and time
+  const currentDateTime = new Date();
   const formattedDateTime = `${currentDateTime.toLocaleDateString()} ${currentDateTime.toLocaleTimeString()}`;
+
+  // Render grouped and sorted episodes
   return (
     <div className="modal-overlay">
       <div className="modal-content">
@@ -53,17 +55,29 @@ const FavoritesModal = ({ isOpen, onClose, favorites, removeFavorite, clearFavor
             <option value="oldestFirst">Least Recently Updated</option>
           </select>
         </div>
-        <ul className="favorites-list">
-          {sortedFavorites.map(episode => (
-            <li key={episode.id} className="favorite-item">
-              <div>
-                <h3>{episode.title}</h3>
-                <p>{formattedDateTime}</p>
-              </div>
-              <button onClick={() => removeFavorite(episode.id)}>Remove</button>
-            </li>
+        <div className="favorites-list-container">
+          {Object.entries(groupedFavorites).map(([title, seasons]) => (
+            <div key={title} className="show-group">
+              <h3>{title}</h3>
+              {Object.entries(seasons).map(([seasonNumber, episodes]) => (
+                <div key={seasonNumber} className="season-group">
+                  <h4>Season {seasonNumber}</h4>
+                  <ul className="favorites-list">
+                    {sortEpisodes(episodes, sortType).map(episode => (
+                      <li key={episode.id} className="favorite-item">
+                        <div>
+                          <h5>{episode.title}</h5>
+                          <p>{formattedDateTime}</p>
+                        </div>
+                        <button onClick={() => removeFavorite(episode.id)}>Remove</button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           ))}
-        </ul>
+        </div>
         <button onClick={clearFavorites}>Clear All</button>
       </div>
     </div>

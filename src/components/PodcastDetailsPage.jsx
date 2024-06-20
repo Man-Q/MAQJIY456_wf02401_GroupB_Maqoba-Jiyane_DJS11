@@ -11,6 +11,7 @@ const PodcastDetailsPage = ({ addToFavorites }) => {
   const [audioSrc, setAudioSrc] = useState('');
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null); // Ref for the audio element
+  console.log(podcastDetails.title)
 
   useEffect(() => {
     const fetchPodcastDetails = async () => {
@@ -65,7 +66,7 @@ const PodcastDetailsPage = ({ addToFavorites }) => {
   if (!podcastDetails) {
     return <div className="loading">Loading...</div>;
   }
-
+  
   return (
     <div className="podcast-details">
       <h2 className="">{podcastDetails.title}</h2>
@@ -75,6 +76,7 @@ const PodcastDetailsPage = ({ addToFavorites }) => {
           <div key={season.id} className="season-card" onClick={() => handleSeasonClick(season)}>
             <img src={season.image} alt={`Season ${season.season}`} />
             <p className="season-number">Season {season.season}</p>
+            <p className="season-number">Episodes {season.episodes.length}</p>
           </div>
         ))}
       </div>
