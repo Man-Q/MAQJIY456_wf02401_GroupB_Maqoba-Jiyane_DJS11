@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './FavoritesModal.css';
 
 const FavoritesModal = ({ isOpen, onClose, favorites, removeFavorite, clearFavorites }) => {
