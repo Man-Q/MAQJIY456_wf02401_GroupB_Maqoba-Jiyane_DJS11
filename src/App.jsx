@@ -21,13 +21,13 @@ const App = () => {
   }, []);
 
   // Function to mark an episode as listened
-  const markEpisodeAsListened = (episodeId) => {
-    const updatedEpisodes = episodes.map(episode =>
-      episode.id === episodeId ? { ...episode, listened: true } : episode
-    );
-    setEpisodes(updatedEpisodes);
-    localStorage.setItem('episodes', JSON.stringify(updatedEpisodes));
-  };
+  // const markEpisodeAsListened = (episodeId) => {
+  //   const updatedEpisodes = episodes.map(episode =>
+  //     episode.id === episodeId ? { ...episode, listened: true } : episode
+  //   );
+  //   setEpisodes(updatedEpisodes);
+  //   localStorage.setItem('episodes', JSON.stringify(updatedEpisodes));
+  // };
 
   // Function to add an episode to favorites
   const addToFavorites = (episode) => {
