@@ -4,6 +4,9 @@ import './PodcastList.css';
 
 const PodcastList = () => {
   const [podcasts, setPodcasts] = useState([]);
+  const [filteredPodcasts, setFilteredPodcasts] = useState([]);
+  const [genres, setGenres] = useState([]);
+  const [selectedGenre, setSelectedGenre] = useState('');
   const [sortField, setSortField] = useState('name');
   const [sortDirection, setSortDirection] = useState('asc');
   const [isLoading, setIsLoading] = useState(true);
@@ -11,17 +14,14 @@ const PodcastList = () => {
 
   useEffect(() => {
     fetch('https://podcast-api.netlify.app')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to fetch podcasts');
-        }
-        return response.json();
-      })
+      .then(response => response.json())
       .then(data => {
-        // Default sort by name A-Z on app start
-        const sortedPodcasts = sortPodcasts(data, sortField, sortDirection);
-        setPodcasts(sortedPodcasts);
+        setPodcasts(data);
+        setFilteredPodcasts(data);
         setIsLoading(false);
+        // Extract genres from the podcasts data
+        const extractedGenres = [...new Set(data.map(podcast => podcast.genres[0]))];
+        setGenres(extractedGenres);
       })
       .catch(error => {
         console.error('Error fetching podcasts:', error);
@@ -29,6 +29,18 @@ const PodcastList = () => {
         setIsLoading(false);
       });
   }, []);
+
+  const handleGenreChange = (e) => {
+    const selected = e.target.value;
+    setSelectedGenre(selected);
+    if (selected) {
+      setFilteredPodcasts(podcasts.filter(podcast => podcast.genres[0] === Number(selected)));
+    } else {
+      setFilteredPodcasts(podcasts);
+    }
+  };
+
+
 
   const sortPodcasts = (podcastsToSort, field, direction) => {
     return [...podcastsToSort].sort((a, b) => {
@@ -38,9 +50,9 @@ const PodcastList = () => {
       } else if (field === 'name-desc') {
         comparison = b.title.localeCompare(a.title);
       } else if (field === 'updated') {
-        comparison = Date.parse(b.updatedAt) - Date.parse(a.updatedAt);
+        comparison = Date.parse(b.updated) - Date.parse(a.updated);
       } else if (field === 'updated-desc') {
-        comparison = Date.parse(a.updatedAt) - Date.parse(b.updatedAt);
+        comparison = Date.parse(a.updated) - Date.parse(b.updated);
       }
       return direction === 'asc' ? comparison : -comparison;
     });
@@ -51,8 +63,8 @@ const PodcastList = () => {
     const direction = selectedField === sortField ? (sortDirection === 'asc' ? 'desc' : 'asc') : 'asc';
     setSortField(selectedField);
     setSortDirection(direction);
-    const sortedPodcasts = sortPodcasts(podcasts, selectedField, direction);
-    setPodcasts(sortedPodcasts);
+    const sortedPodcasts = sortPodcasts(filteredPodcasts, selectedField, direction);
+    setFilteredPodcasts(sortedPodcasts);
   };
 
   if (isLoading) {
@@ -65,17 +77,22 @@ const PodcastList = () => {
 
   return (
     <div className="podcast-list">
-      <div className="sort-options">
-        <label>Sort by: </label>
-        <select value={sortField} onChange={handleSortChange}>
-          <option value="name">Name A-Z</option>
-          <option value="name-desc">Name Z-A</option>
-          <option value="updated">Most Recently Updated</option>
-          <option value="updated-desc">Least Recently Updated</option>
+      <div className="filters">
+        <select onChange={handleGenreChange} value={selectedGenre}>
+          <option value="">All Genres</option>
+          {genres.map((genre, index) => (
+            <option key={index} value={genre}>{genre}</option>
+          ))}
+        </select>
+        <select onChange={handleSortChange} value={sortField}>
+          <option value="name">Sort by Name (A-Z)</option>
+          <option value="name_desc">Sort by Name (Z-A)</option>
+          <option value="updated_at">Sort by Recently Updated</option>
+          <option value="updated_at_desc">Sort by Least Recently Updated</option>
         </select>
       </div>
       <div className="podcast-grid">
-        {podcasts.map(podcast => (
+        {filteredPodcasts.map(podcast => (
           <PodcastItem key={podcast.id} podcast={podcast} />
         ))}
       </div>
