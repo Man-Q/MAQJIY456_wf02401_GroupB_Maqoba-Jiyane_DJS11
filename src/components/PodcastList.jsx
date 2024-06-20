@@ -27,8 +27,8 @@ const PodcastList = () => {
         setError('Error fetching podcasts');
         setIsLoading(false);
       });
-  }, []);
-
+  }, [sortField, sortDirection]);
+ 
   const handleGenreChange = (e) => {
     const selected = e.target.value;
     setSelectedGenre(selected);
