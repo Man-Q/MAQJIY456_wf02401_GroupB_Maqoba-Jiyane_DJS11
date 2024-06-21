@@ -2,7 +2,7 @@ Certainly! Here's a template for your README file based on the typical requireme
 
 ---
 
-# Podcast Player Application
+# PodSphere
 
 Welcome to the Podcast Player Application! This application allows users to browse podcasts, view episode details, and manage their favorite episodes.
 
