@@ -6,6 +6,8 @@ Certainly! Here's a template for your README file based on the typical requireme
 
 Welcome to the Podcast Player Application! This application allows users to browse podcasts, view episode details, and manage their favorite episodes.
 
+[Link to live project](https://podsphere.netlify.app/)
+
 ## Table of Contents
 
 - [Introduction](#introduction)
