@@ -63,16 +63,16 @@ Here are some examples of how to use the Podcast Player Application:
 
 - **Browsing podcasts:**
   - Navigate through different podcasts using the navigation menu.
-  ![Alt text](./public\images\image.png)
+  ![Alt text](./public/images/image.png)
 - **Viewing episode details:**
   - Click on a podcast episode to view its details, description, and play options.
-  ![Alt text](./public\images\image-1.png)
+  ![Alt text](./public/images/image-1.png)
 - **Adding episodes to favorites:**
   - Use the "Add to Favorites" button on any episode card to save it for later.
-  ![Alt text](./public\images\image-2.png)
+  ![Alt text](./public/images/image-2.png)
 - **Playing episodes:**
   - Click on the play button on an episode to listen to it directly in your browser.
-  ![Alt text](./public\images\image-3.png)
+  ![Alt text](./public/images/image-3.png)
 
 ## Contact Information
 
