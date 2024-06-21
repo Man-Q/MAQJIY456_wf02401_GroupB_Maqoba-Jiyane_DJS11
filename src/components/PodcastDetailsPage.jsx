@@ -10,7 +10,7 @@ const PodcastDetailsPage = ({ addToFavorites }) => {
   const [selectedEpisode, setSelectedEpisode] = useState(null);
   const [audioSrc, setAudioSrc] = useState('');
   const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef(null); // Ref for the audio element
+  const audioRef = useRef(null);
 
   useEffect(() => {
     const fetchPodcastDetails = async () => {
@@ -33,7 +33,7 @@ const PodcastDetailsPage = ({ addToFavorites }) => {
 
   const handleSeasonClick = (season) => {
     setSelectedSeason(season);
-    setSelectedEpisode(null); // Reset selected episode when a new season is clicked
+    setSelectedEpisode(null);
   };
 
   const handleEpisodeClick = (episode) => {
@@ -69,6 +69,15 @@ const PodcastDetailsPage = ({ addToFavorites }) => {
   return (
     <div className="podcast-details">
       <h2 className="">{podcastDetails.title}</h2>
+      {isPlaying && (
+        <div className="player-container">
+          <h3>Now Playing: {selectedEpisode?.title}</h3>
+          <audio controls ref={audioRef} onEnded={handleAudioEnd}>
+            <source src={audioSrc} type="audio/mpeg" />
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+      )}
       <p className="podcast-description">{podcastDetails.description}</p>
       <div className="seasons-container">
         {podcastDetails.seasons.map(season => (
@@ -88,15 +97,6 @@ const PodcastDetailsPage = ({ addToFavorites }) => {
               <button onClick={() => addToFavorites(episode, podcastDetails.title, selectedSeason.season)}>Add to Favorites</button>
             </div>
           ))}
-        </div>
-      )}
-      {isPlaying && (
-        <div className="player-container">
-          <h3>Now Playing: {selectedEpisode?.title}</h3>
-          <audio controls ref={audioRef} onEnded={handleAudioEnd}>
-            <source src={audioSrc} type="audio/mpeg" />
-            Your browser does not support the audio element.
-          </audio>
         </div>
       )}
     </div>
