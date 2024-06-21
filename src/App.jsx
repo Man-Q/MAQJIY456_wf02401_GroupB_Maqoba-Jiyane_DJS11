@@ -16,7 +16,7 @@ const App = () => {
   useEffect(() => {
     const storedEpisodes = JSON.parse(localStorage.getItem("episodes")) || [];
     const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    setEpisodes(storedEpisodes);
+    // setEpisodes(storedEpisodes);
     setFavorites(storedFavorites);
   }, []);
 
