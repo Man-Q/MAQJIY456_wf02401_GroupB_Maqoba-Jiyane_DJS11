@@ -22,9 +22,9 @@ const FavoritesModal = ({ isOpen, onClose, favorites, removeFavorite, clearFavor
       case 'titleZtoA':
         return episodes.sort((a, b) => b.title.localeCompare(a.title));
       case 'recentFirst':
-        return episodes.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+        return episodes.sort((a, b) => b.updatedAt - a.updatedAt);
       case 'oldestFirst':
-        return episodes.sort((a, b) => new Date(a.updatedAt) - new Date(b.updatedAt));
+        return episodes.sort((a, b) => a.updatedAt - b.updatedAt);
       default:
         return episodes;
     }
@@ -34,10 +34,6 @@ const FavoritesModal = ({ isOpen, onClose, favorites, removeFavorite, clearFavor
   const handleSortChange = (e) => {
     setSortType(e.target.value);
   };
-
-  // Get current date and time
-  const currentDateTime = new Date();
-  const formattedDateTime = `${currentDateTime.toLocaleDateString()} ${currentDateTime.toLocaleTimeString()}`;
 
   // Render grouped and sorted episodes
   return (
@@ -56,7 +52,7 @@ const FavoritesModal = ({ isOpen, onClose, favorites, removeFavorite, clearFavor
         </div>
         <div className="favorites-list-container">
           {Object.entries(groupedFavorites).map(([showTitle, seasons]) => (
-            <div key={showTitle} className="show-group">
+            <div key={showTitle} className="show-group">{console.log(seasons)}
               <h3>{showTitle}</h3>
               {Object.entries(seasons).map(([seasonNumber, episodes]) => (
                 <div key={seasonNumber} className="season-group">
@@ -66,7 +62,7 @@ const FavoritesModal = ({ isOpen, onClose, favorites, removeFavorite, clearFavor
                       <li key={episode.id} className="favorite-item">
                         <div>
                           <h5>{episode.title}</h5>
-                          <p>{formattedDateTime}</p>
+                          <p>{episode.time}</p>
                         </div>
                         <button onClick={() => removeFavorite(episode.episode) }>Remove</button>
                       </li>

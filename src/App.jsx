@@ -29,11 +29,12 @@ const App = () => {
   //   localStorage.setItem('episodes', JSON.stringify(updatedEpisodes));
   // };
   
-  const addToFavorites = (episode, showTitle, seasonNumber) => {
-    console.log('Adding to favorites:', episode, showTitle, seasonNumber);
-    const updatedEpisode = { ...episode, showTitle, seasonNumber };
+  const addToFavorites = (episode, showTitle, seasonNumber, time) => {
+    console.log('Adding to favorites:', episode, showTitle, seasonNumber, time);
+    const updatedEpisode = { ...episode, showTitle, seasonNumber, time };
     const updatedFavorites = [...favorites, updatedEpisode];
     setFavorites(updatedFavorites);
+    console.log(updatedFavorites)
     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
   };
   

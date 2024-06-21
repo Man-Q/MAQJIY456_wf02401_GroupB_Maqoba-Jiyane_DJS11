@@ -85,6 +85,10 @@ const PodcastDetailsPage = ({ addToFavorites }) => {
     return <div className="loading">Loading...</div>;
   }
 
+  // Get current date and time
+  const currentDateTime = new Date();
+  const formattedDateTime = `${currentDateTime.toLocaleDateString()} ${currentDateTime.toLocaleTimeString()}`;
+
   return (
     <div className="podcast-details">
       <h2>{podcastDetails.title}</h2>
@@ -113,7 +117,7 @@ const PodcastDetailsPage = ({ addToFavorites }) => {
           {selectedSeason.episodes.map(episode => (
             <div key={episode.id} className="episode-card">
               <p onClick={() => handleEpisodeClick(episode)}>{episode.title}</p>
-              <button onClick={() => addToFavorites(episode, podcastDetails.title, selectedSeason.season)}>Add to Favorites</button>
+              <button onClick={() => addToFavorites(episode, podcastDetails.title, selectedSeason.season, formattedDateTime)}>Add to Favorites</button>
             </div>
           ))}
         </div>
