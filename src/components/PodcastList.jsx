@@ -33,7 +33,6 @@ const PodcastList = () => {
     const selected = e.target.value;
     setSelectedGenre(selected);
     if (selected) {
-    console.log(selected)
       setFilteredPodcasts(podcasts.filter(podcast => podcast.genres[0] === parseInt(selected)));
     } else {
       setFilteredPodcasts(podcasts);

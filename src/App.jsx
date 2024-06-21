@@ -19,22 +19,11 @@ const App = () => {
     // setEpisodes(storedEpisodes);
     setFavorites(storedFavorites);
   }, []);
-
-  // Function to mark an episode as listened
-  // const markEpisodeAsListened = (episodeId) => {
-  //   const updatedEpisodes = episodes.map(episode =>
-  //     episode.id === episodeId ? { ...episode, listened: true } : episode
-  //   );
-  //   setEpisodes(updatedEpisodes);
-  //   localStorage.setItem('episodes', JSON.stringify(updatedEpisodes));
-  // };
   
   const addToFavorites = (episode, showTitle, seasonNumber, time) => {
-    console.log('Adding to favorites:', episode, showTitle, seasonNumber, time);
     const updatedEpisode = { ...episode, showTitle, seasonNumber, time };
     const updatedFavorites = [...favorites, updatedEpisode];
     setFavorites(updatedFavorites);
-    console.log(updatedFavorites)
     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
   };
   

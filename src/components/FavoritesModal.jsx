@@ -52,7 +52,7 @@ const FavoritesModal = ({ isOpen, onClose, favorites, removeFavorite, clearFavor
         </div>
         <div className="favorites-list-container">
           {Object.entries(groupedFavorites).map(([showTitle, seasons]) => (
-            <div key={showTitle} className="show-group">{console.log(seasons)}
+            <div key={showTitle} className="show-group">
               <h3>{showTitle}</h3>
               {Object.entries(seasons).map(([seasonNumber, episodes]) => (
                 <div key={seasonNumber} className="season-group">
