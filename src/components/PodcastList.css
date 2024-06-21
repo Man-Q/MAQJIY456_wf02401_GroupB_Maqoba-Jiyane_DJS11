@@ -1,5 +1,3 @@
-
-
 /* src/components/PodcastList.css */
 .podcast-list {
   padding: 20px;
@@ -15,10 +13,36 @@
 }
 
 .podcast-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
+}
+
+/* Default (Extra Small Devices, Phones) */
+.podcast-grid > * {
+  flex: 1 1 100%; /* 1 column by default */
+}
+
+/* Small Devices, Tablets */
+@media (min-width: 577px) and (max-width: 768px) {
+  .podcast-grid > * {
+    flex: 1 1 calc(50% - 20px); /* 2 columns on small devices */
+  }
+}
+
+/* Medium Devices, Desktops */
+@media (min-width: 769px) and (max-width: 992px) {
+  .podcast-grid > * {
+    flex: 1 1 calc(25% - 20px); /* 4 columns on medium devices */
+  }
+}
+
+/* Large Devices, Large Desktops */
+@media (min-width: 993px) {
+  .podcast-grid > * {
+    flex: 1 1 calc(16.66% - 20px); /* 6 columns on large devices */
+  }
 }
 
 .loading,

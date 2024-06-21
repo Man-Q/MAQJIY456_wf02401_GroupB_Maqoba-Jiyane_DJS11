@@ -8,4 +8,41 @@
 .content {
   flex: 1;
   padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Default (Extra Small Devices, Phones) */
+.content > * {
+  flex: 1 1 100%; /* 1 column by default */
+}
+
+/* Small Devices, Tablets */
+@media (min-width: 577px) and (max-width: 768px) {
+  .content > * {
+    flex: 1 1 calc(50% - 20px); /* 2 columns on small devices */
+  }
+}
+
+/* Medium Devices, Desktops */
+@media (min-width: 769px) and (max-width: 992px) {
+  .content > * {
+    flex: 1 1 calc(25% - 20px); /* 4 columns on medium devices */
+  }
+}
+
+/* Large Devices, Large Desktops */
+@media (min-width: 993px) {
+  .content > * {
+    flex: 1 1 calc(16.66% - 20px); /* 6 columns on large devices */
+  }
+}
+
+/* Additional styling for items */
+.content > * {
+  background: #fff; /* Example background */
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
 }
