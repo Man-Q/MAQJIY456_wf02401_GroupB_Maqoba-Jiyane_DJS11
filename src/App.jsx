@@ -8,7 +8,7 @@ import FavoritesModal from "./components/FavoritesModal";
 import "./App.css";
 
 const App = () => {
-  const [episodes, setEpisodes] = useState([]);
+  // const [episodes, setEpisodes] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [isFavoritesModalOpen, setIsFavoritesModalOpen] = useState(false);
 
