@@ -8,10 +8,10 @@ const FavoritesModal = ({ isOpen, onClose, favorites, removeFavorite, clearFavor
 
   // Group episodes by show and season
   const groupedFavorites = favorites.reduce((acc, episode) => {
-    const { title, seasonNumber } = episode;
-    if (!acc[title]) acc[title] = {};
-    if (!acc[title][seasonNumber]) acc[title][seasonNumber] = [];
-    acc[title][seasonNumber].push(episode);
+    const { showTitle, seasonNumber } = episode;
+    if (!acc[showTitle]) acc[showTitle] = {};
+    if (!acc[showTitle][seasonNumber]) acc[showTitle][seasonNumber] = [];
+    acc[showTitle][seasonNumber].push(episode);
     return acc;
   }, {});
 
@@ -56,9 +56,9 @@ const FavoritesModal = ({ isOpen, onClose, favorites, removeFavorite, clearFavor
           </select>
         </div>
         <div className="favorites-list-container">
-          {Object.entries(groupedFavorites).map(([title, seasons]) => (
-            <div key={title} className="show-group">
-              <h3>{title}</h3>
+          {Object.entries(groupedFavorites).map(([showTitle, seasons]) => (
+            <div key={showTitle} className="show-group">
+              <h3>{showTitle}</h3>
               {Object.entries(seasons).map(([seasonNumber, episodes]) => (
                 <div key={seasonNumber} className="season-group">
                   <h4>Season {seasonNumber}</h4>
@@ -68,8 +68,8 @@ const FavoritesModal = ({ isOpen, onClose, favorites, removeFavorite, clearFavor
                         <div>
                           <h5>{episode.title}</h5>
                           <p>{formattedDateTime}</p>
-                        </div>
-                        <button onClick={() => removeFavorite(episode.id)}>Remove</button>
+                        </div>{console.log(episode.episode)}
+                        <button onClick={() => removeFavorite(episode.episode) }>Remove</button>
                       </li>
                     ))}
                   </ul>
