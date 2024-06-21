@@ -17,7 +17,9 @@ const Header = ({ onFavoritesClick }) => {
       <div className="search-bar">
         <input type="text" placeholder="Search..." />
       </div>
-      <button className="favorites-button" onClick={onFavoritesClick}>Favorites</button>
+      <nav className="nav-links">
+        <button className="favorites-button" onClick={onFavoritesClick}>Favorites</button>
+      </nav>
     </header>
   );
 };

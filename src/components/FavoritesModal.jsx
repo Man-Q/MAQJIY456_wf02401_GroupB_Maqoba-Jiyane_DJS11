@@ -77,7 +77,7 @@ const FavoritesModal = ({ isOpen, onClose, favorites, removeFavorite, clearFavor
             </div>
           ))}
         </div>
-        <button onClick={clearFavorites}>Clear All</button>
+        <button className = "clear-all" onClick={clearFavorites}>Clear All</button>
       </div>
     </div>
   );

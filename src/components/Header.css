@@ -1,22 +1,69 @@
-
-
 /* src/components/Header.css */
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #282c34;
-    color: white;
-  }
-  
-  .logo {  
-    max-width: 100px; /* Adjust the width of your logo */
-    height: auto; /* Ensures the logo scales proportionally */
-  }
-  
-  .search-bar input {
-    padding: 5px;
-    font-size: 1rem;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #282c34;
+  color: white;
+  position: relative; /* Fixed position to keep it at the top */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+
+.logo {
+  max-width: 120px; /* Adjust the width of your logo */
+  height: auto; /* Ensures the logo scales proportionally */
+}
+
+.search-bar {
+  /* flex: 1; Expand to fill remaining space */
+  margin-left: 20px; /* Provide some spacing from the logo */
+}
+
+.search-bar input {
+  width: 100%; /* Take full width of the search bar */
+  padding: 10px; /* Increase padding for better touch interaction */
+  font-size: 1rem;
+  border: none; /* Remove default border */
+  border-radius: 4px; /* Add slight border radius */
+  background-color: #f0f0f0; /* Light background color */
+}
+
+.search-bar input:focus {
+  outline: none; /* Remove outline on focus */
+  background-color: #fff; /* Change background color on focus */
+}
+
+.search-bar input::placeholder {
+  color: #aaa; /* Placeholder text color */
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+}
+
+.nav-link {
+  margin-left: 20px; /* Adjust spacing between links */
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.nav-link:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+
+.favorites-button {
+  padding: 10px 20px; /* Adjust padding */
+  background-color: #61dafb; /* Button background color */
+  color: #282c34; /* Button text color */
+  border: none; /* Remove border */
+  border-radius: 4px; /* Add border radius */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+.favorites-button:hover {
+  background-color: #4ca3dd; /* Darker background color on hover */
+}

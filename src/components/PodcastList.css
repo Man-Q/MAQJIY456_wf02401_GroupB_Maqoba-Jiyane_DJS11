@@ -30,3 +30,14 @@
   font-size: 20px;
   text-align: center;
 }
+
+.filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #282c34; /* Match the header background color */
+  color: white; /* Match the header text color */
+  border-radius: 8px;
+  margin-bottom: 20px;
+}

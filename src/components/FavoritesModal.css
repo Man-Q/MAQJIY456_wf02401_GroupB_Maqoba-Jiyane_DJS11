@@ -1,3 +1,5 @@
+/* src/components/FavoritesModal.css */
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -12,28 +14,50 @@
 }
 
 .modal-content {
-  background: white;
+  position: relative; /* Ensure absolute positioning of close button is relative to modal */
+  background: #282c34; /* Match header background color */
   padding: 20px;
   border-radius: 8px;
   width: 80%;
   max-width: 600px;
   max-height: 80vh;
-  overflow-y: auto;
+  overflow-y: scroll; /* Ensure scrolling is enabled */
+  color: white; /* Match header text color */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
+}
+
+/* Hide scrollbar for Webkit browsers */
+.modal-content::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge, and Firefox */
+.modal-content {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .close-button {
   position: absolute;
   top: 10px;
   right: 10px;
-  background: #f44336;
-  color: white;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
+  padding: 10px 20px; /* Adjust padding */
+  background-color: #61dafb; /* Button background color */
+  color: #282c34; /* Button text color */
+  border: none; /* Remove border */
+  border-radius: 4px; /* Add border radius */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+  z-index: 1; /* Ensure it's above the modal content */
+}
+
+.close-button:hover {
+  background-color: #4ca3dd; /* Darker background color on hover */
 }
 
 .sort-options {
   margin-bottom: 20px;
+  color: white; /* Match header text color */
 }
 
 .favorites-list-container {
@@ -78,5 +102,18 @@
 }
 
 .favorite-item button:hover {
+  background: #d32f2f;
+}
+
+.clear-all{
+  background: #f44336;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.clear-all:hover {
   background: #d32f2f;
 }

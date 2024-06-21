@@ -49,14 +49,14 @@ const App = () => {
   };
 
   // Function to reset listening history
-  const resetListeningHistory = () => {
-    const resetEpisodes = episodes.map((episode) => ({
-      ...episode,
-      listened: false,
-    }));
-    setEpisodes(resetEpisodes);
-    localStorage.removeItem("episodes");
-  };
+  // const resetListeningHistory = () => {
+  //   const resetEpisodes = episodes.map((episode) => ({
+  //     ...episode,
+  //     listened: false,
+  //   }));
+  //   setEpisodes(resetEpisodes);
+  //   localStorage.removeItem("episodes");
+  // };
 
   // Function to clear all favorites
   const clearFavorites = () => {
