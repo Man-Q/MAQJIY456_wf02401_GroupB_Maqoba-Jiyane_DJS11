@@ -10,6 +10,7 @@ const PodcastDetailsPage = ({ addToFavorites }) => {
   const [selectedEpisode, setSelectedEpisode] = useState(null);
   const [audioSrc, setAudioSrc] = useState('');
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isEpisodePlaying, setIsEpisodePlaying] = useState(false); // Track if an episode is playing
   const audioRef = useRef(null);
 
   useEffect(() => {
@@ -38,8 +39,9 @@ const PodcastDetailsPage = ({ addToFavorites }) => {
 
   const handleEpisodeClick = (episode) => {
     setSelectedEpisode(episode);
-    setAudioSrc('https://podcast-api.netlify.app/placeholder-audio.mp3');
+    setAudioSrc(episode.file);
     setIsPlaying(true);
+    setIsEpisodePlaying(true); // Mark episode as playing
   };
 
   useEffect(() => {
@@ -52,7 +54,24 @@ const PodcastDetailsPage = ({ addToFavorites }) => {
 
   const handleAudioEnd = () => {
     setIsPlaying(false);
+    setIsEpisodePlaying(false); // Mark episode as not playing when audio ends
   };
+
+  // Prevent closing the page while an episode is playing
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      if (isEpisodePlaying) {
+        event.preventDefault();
+        event.returnValue = ''; // Standard for most browsers
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [isEpisodePlaying]);
 
   if (!id) {
     return <div>No podcast selected</div>;
@@ -68,7 +87,7 @@ const PodcastDetailsPage = ({ addToFavorites }) => {
 
   return (
     <div className="podcast-details">
-      <h2 className="">{podcastDetails.title}</h2>
+      <h2>{podcastDetails.title}</h2>
       {isPlaying && (
         <div className="player-container">
           <h3>Now Playing: {selectedEpisode?.title}</h3>

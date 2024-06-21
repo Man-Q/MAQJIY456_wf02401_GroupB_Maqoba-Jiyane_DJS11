@@ -5,7 +5,6 @@ const FavoritesModal = ({ isOpen, onClose, favorites, removeFavorite, clearFavor
   const [sortType, setSortType] = useState('titleAtoZ');
 
   if (!isOpen) return null;
-
   // Group episodes by show and season
   const groupedFavorites = favorites.reduce((acc, episode) => {
     const { showTitle, seasonNumber } = episode;
@@ -68,7 +67,7 @@ const FavoritesModal = ({ isOpen, onClose, favorites, removeFavorite, clearFavor
                         <div>
                           <h5>{episode.title}</h5>
                           <p>{formattedDateTime}</p>
-                        </div>{console.log(episode.episode)}
+                        </div>
                         <button onClick={() => removeFavorite(episode.episode) }>Remove</button>
                       </li>
                     ))}

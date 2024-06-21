@@ -28,13 +28,15 @@ const App = () => {
   //   setEpisodes(updatedEpisodes);
   //   localStorage.setItem('episodes', JSON.stringify(updatedEpisodes));
   // };
-
-  // Function to add an episode to favorites
-  const addToFavorites = (episode) => {
-    const updatedFavorites = [...favorites, episode];
+  
+  const addToFavorites = (episode, showTitle, seasonNumber) => {
+    console.log('Adding to favorites:', episode, showTitle, seasonNumber);
+    const updatedEpisode = { ...episode, showTitle, seasonNumber };
+    const updatedFavorites = [...favorites, updatedEpisode];
     setFavorites(updatedFavorites);
     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
   };
+  
 
   // Function to remove an episode from favorites
   const removeFavorite = (episodeId) => {
@@ -59,6 +61,7 @@ const App = () => {
   // Function to clear all favorites
   const clearFavorites = () => {
     setFavorites([]);
+    localStorage.removeItem("favorites");
   };
 
   const toggleFavoritesModal = () => {
