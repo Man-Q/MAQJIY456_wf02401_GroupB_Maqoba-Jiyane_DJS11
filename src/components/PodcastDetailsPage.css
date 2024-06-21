@@ -1,67 +1,78 @@
-/* src/components/PodcastList.css */
-.podcast-list {
+/* src/components/PodcastDetailsPage.css */
+
+.podcast-details {
+  max-width: 800px;
+  margin: 0 auto;
   padding: 20px;
 }
 
-.sort-options {
+.podcast-details h2 {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.player-container {
+  margin: 20px 0;
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: 30%;
+  background: transparent;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  z-index: 1000;
+  padding: 10px;
+  box-sizing: border-box;
+  height: 20%;
+}
+
+.podcast-description {
   margin-bottom: 20px;
 }
 
-.sort-options button {
-  margin-right: 10px;
-  padding: 5px 10px;
-}
-
-.podcast-grid {
+.seasons-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
+  gap: 10px;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  white-space: nowrap; /* Prevent items from wrapping to the next line */
 }
 
-/* Default (Extra Small Devices, Phones) */
-.podcast-grid > * {
-  flex: 1 1 100%; /* 1 column by default */
-}
-
-/* Small Devices, Tablets */
-@media (min-width: 577px) and (max-width: 768px) {
-  .podcast-grid > * {
-    flex: 1 1 calc(50% - 20px); /* 2 columns on small devices */
-  }
-}
-
-/* Medium Devices, Desktops */
-@media (min-width: 769px) and (max-width: 992px) {
-  .podcast-grid > * {
-    flex: 1 1 calc(25% - 20px); /* 4 columns on medium devices */
-  }
-}
-
-/* Large Devices, Large Desktops */
-@media (min-width: 993px) {
-  .podcast-grid > * {
-    flex: 1 1 calc(16.66% - 20px); /* 6 columns on large devices */
-  }
-}
-
-.loading,
-.error {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* Full viewport height */
-  font-size: 20px;
+.season-card {
+  width: 150px;
+  cursor: pointer;
   text-align: center;
+  flex: 0 0 auto; /* Ensure each season card has its natural width */
 }
 
-.filters {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 20px;
-  background-color: #282c34; /* Match the header background color */
-  color: white; /* Match the header text color */
+.season-card img {
+  width: 100%;
   border-radius: 8px;
-  margin-bottom: 20px;
+}
+
+.episodes-container {
+  margin-top: 20px;
+}
+
+.episode-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.episode-card p {
+  cursor: pointer;
+  margin: 0;
+}
+
+.episode-card button {
+  background: #f44336;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.episode-card button:hover {
+  background: #d32f2f;
 }
