@@ -4,6 +4,7 @@
 A comprehensive podcast application that allows users to browse, play, and manage their favorite podcast episodes. The application includes features such as adding episodes to favorites, playing episodes, and a responsive user interface.
 
 [PodSphere](https://docs.google.com/presentation/d/1T9bP3VIiumeKsV0oMeQ1Yq4IaRSLS2j7vGyIpGLKLCY/edit?usp=sharing)
+[PodSphere](https://podsphere.netlify.app/)
 
 ## Table of Contents
 
